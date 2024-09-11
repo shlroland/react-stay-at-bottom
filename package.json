@@ -1,5 +1,5 @@
 {
-  "name": "my-ts-lib",
+  "name": "react-stay-bottom",
   "type": "module",
   "version": "0.0.0",
   "packageManager": "pnpm@9.10.0",

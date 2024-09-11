@@ -11,13 +11,13 @@ import {
   usePersistFn,
 } from './utils'
 
-interface ScrollBottomOptions {
+interface StayBottomOptions {
   handleScroll?: (scrollElement: HTMLElement) => void
 
   autoStay?: boolean
 }
 
-export function useScrollBottom(options: ScrollBottomOptions) {
+export function useStayBottom(options: StayBottomOptions) {
   const { handleScroll, autoStay = true } = options
 
   const scrollRef = useRef<HTMLElement>(null)
@@ -38,7 +38,7 @@ export function useScrollBottom(options: ScrollBottomOptions) {
     invariant(
       scrollRef.current !== null,
       `Trying to scroll to the bottom, but no element was found.
-        Did you call this scrollBottom before the component with this hook finished mounting?`,
+        Did you call this stayBottom before the component with this hook finished mounting?`,
     )
 
     const offset = Math.min(maxScrollTop(scrollRef.current), position)
@@ -64,7 +64,7 @@ export function useScrollBottom(options: ScrollBottomOptions) {
     invariant(
       scrollRef.current !== null,
       `Trying to get scroll position, but no element was found.
-          Did you call this scrollBottom before the component with this hook finished mounting?`,
+          Did you call this stayBottom before the component with this hook finished mounting?`,
     )
 
     const scrollElement = scrollRef.current
