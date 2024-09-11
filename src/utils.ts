@@ -1,19 +1,31 @@
 import memoize from 'memoize-one'
 import { type RefObject, useEffect, useLayoutEffect, useRef } from 'react'
 
+/**
+ * @internal
+ */
 export const useIsomorphicLayoutEffect =
   typeof window === 'undefined' ? useEffect : useLayoutEffect
 
+/**
+ * @internal
+ */
 export const defaultRunScroll = memoize(
   (domRef: HTMLElement) => (offset: number) => {
     domRef.scrollTop = offset
   },
 )
 
+/**
+ * @internal
+*/
 export function maxScrollTop(dom: HTMLElement) {
   return dom.scrollHeight - dom.clientHeight
 }
 
+/**
+ * @internal
+*/
 export function useElementEvent<K extends keyof HTMLElementEventMap>(
   target: RefObject<HTMLElement | null | undefined>,
   eventName: K,
@@ -28,12 +40,18 @@ export function useElementEvent<K extends keyof HTMLElementEventMap>(
   }, [eventName, listener, target])
 }
 
+/**
+ * @internal
+*/
 export function canUseScrollTopMax<T extends Element>(
   elm: T,
 ): elm is T & { scrollTopMax: number } {
   return typeof (elm as { scrollTopMax?: unknown }).scrollTopMax === 'number'
 }
 
+/**
+ * @internal
+*/
 export function usePersistFn<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   T extends (this: any, ...args: any[]) => any,
