@@ -12,17 +12,65 @@ import {
 } from './utils'
 
 interface StayBottomOptions {
+  /**
+   * A function that replace the default scroll handler.
+   * @param scrollElement - The scrollable element.
+   * @default undefined
+   */
   handleScroll?: (scrollElement: HTMLElement) => void
 
+  /**
+   * Whether to automatically stay at the bottom when the scrollable element is scrolled.
+   * @default true
+   */
   autoStay?: boolean
 
+  /**
+   * Whether to stay at the bottom when the component is mounted.
+   * @default false
+   */
   initialStay?: boolean
+}
+
+interface StayBottomReturn {
+  /**
+   * A function that keep the scrollable element at the bottom.
+   */
+  stayAtBottom: () => void
+
+  /**
+   * A function that stop the scrollable element from staying at the bottom.
+   */
+  stopAtBottom: () => void
+
+  /**
+   * A function that scroll the scrollable element to the bottom.
+   * @param behavior - The behavior of the scroll.
+   */
+  scrollToBottom: (behavior?: ScrollOptions['behavior']) => void
+
+  /**
+   * Whether the scrollable element is at the bottom.
+   */
+  atBottom: boolean
+
+  /**
+   * Whether the scrollable element is at the bottom.
+   */
+  isAtBottom: () => boolean
+
+  /**
+   * A function that scroll the scrollable element to the bottom.
+   * @param position - The offset to scroll.
+   * @param behavior - The behavior of the scroll.
+   */
+  scroll: (position: number, behavior?: ScrollOptions['behavior']) => void
 }
 
 export function useStayAtBottom(
   scrollRef: RefObject<HTMLElement>,
   options?: StayBottomOptions,
-) {
+): StayBottomReturn {
   const { handleScroll, autoStay = true, initialStay = false } = options ?? {}
 
   const shouldStayBottom = useRef(false)
