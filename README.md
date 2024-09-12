@@ -2,6 +2,9 @@
 
 A React hook that keeps a scrollable element at the bottom.
 
+![NPM Version](https://img.shields.io/npm/v/react-stay-at-bottom)
+
+
 ## Install
 
 ```bash
@@ -42,17 +45,63 @@ type: `{ handleScroll?: (scrollElement: HTMLElement) => void, autoStay?: boolean
 
 description: an object controlling the behavior of the hook:
 
-- `handleScroll`: A function that replace the default scroll handler.
-- `autoStay`: Whether to automatically stay at the bottom when the scrollable element is scrolled. Defaults to `true`.
-- `initialStay`: Whether to stay at the bottom when the component is mounted. Defaults to `false`.
+#### `handleScroll`: 
+
+type: `(scrollElement: HTMLElement) => void`
+
+description: a function that replace the default scroll handler.
+
+#### `autoStay`: 
+
+type: `boolean`
+
+default: `true`
+
+description: Whether to automatically stay at the bottom when the scrollable element is scrolled.
+
+#### `initialStay`: 
+
+type: `boolean`
+
+default: `false`
+
+description: Whether to stay at the bottom when the component is mounted.
 
 ## Return
 
-- `stayAtBottom`: A function that keeps the scrollable element at the bottom.
-- `stopAtBottom`: A function that stops the scrollable element from being kept at the bottom.
-- `scrollToBottom`: A function that scrolls the scrollable element to the bottom.
-- `atBottom`: A boolean indicating whether the scrollable element is at the bottom.
-- `scroll`: A function that scrolls the scrollable element to the bottom.
+### `stayAtBottom`: 
+
+type: `() => void`
+
+description: A function that keeps the scrollable element at the bottom.
+
+### `stopAtBottom`: 
+
+type: `() => void`
+
+description: A function that stops the scrollable element from being kept at the bottom.
+
+### `scrollToBottom`: 
+
+type: `() => void`
+
+description: A function that scrolls the scrollable element to the bottom.
+
+### `atBottom`: 
+
+type: `boolean`
+
+description: A boolean indicating whether the scrollable element is at the bottom.
+
+### `scroll`: 
+
+type: `() => void`
+
+description: A function that scrolls the scrollable element to the bottom.
+
+## Similar Projects
+
+- [react-stay-scrolled](https://github.com/dotcore64/react-stay-scrolled)
 
 ## License
 
