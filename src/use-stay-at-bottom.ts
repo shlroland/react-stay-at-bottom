@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef } from 'react'
+import { type RefObject, useCallback, useMemo, useRef } from 'react'
 import invariant from 'tiny-invariant'
 
 import { loopRequestAnimationFrame } from './raf'
@@ -15,21 +15,25 @@ interface StayBottomOptions {
   handleScroll?: (scrollElement: HTMLElement) => void
 
   autoStay?: boolean
+
+  initialStay?: boolean
 }
 
-export function useStayBottom(options: StayBottomOptions) {
-  const { handleScroll, autoStay = true } = options
+export function useStayAtBottom(
+  scrollRef: RefObject<HTMLElement>,
+  options?: StayBottomOptions,
+) {
+  const { handleScroll, autoStay = true, initialStay = false } = options ?? {}
 
-  const scrollRef = useRef<HTMLElement>(null)
   const shouldStayBottom = useRef(false)
   const scrollingRaf = useRef<null | number>(null)
 
-  const stayOnBottom = useCallback(() => {
+  const stayAtBottom = useCallback(() => {
     if (shouldStayBottom.current) return
     shouldStayBottom.current = true
   }, [])
 
-  const stopOnBottom = useCallback(() => {
+  const stopAtBottom = useCallback(() => {
     if (!shouldStayBottom.current) return
     shouldStayBottom.current = false
   }, [])
@@ -56,16 +60,12 @@ export function useStayBottom(options: StayBottomOptions) {
     })
   })
 
-  const scrollBottom = usePersistFn(() => {
+  const scrollToBottom = usePersistFn(() => {
     scroll(Number.POSITIVE_INFINITY)
   })
 
-  const isOnBottom = usePersistFn(() => {
-    invariant(
-      scrollRef.current !== null,
-      `Trying to get scroll position, but no element was found.
-          Did you call this stayBottom before the component with this hook finished mounting?`,
-    )
+  const isAtBottom = usePersistFn(() => {
+    if (scrollRef.current == null) return false
 
     const scrollElement = scrollRef.current
 
@@ -89,32 +89,38 @@ export function useStayBottom(options: StayBottomOptions) {
   useElementEvent(scrollRef, 'scroll', () => {
     if (!autoStay) return
     if (scrollingRaf.current != null) return
-    if (isOnBottom()) {
-      stayOnBottom()
+    if (isAtBottom()) {
+      stayAtBottom()
     } else {
-      stopOnBottom()
+      stopAtBottom()
     }
   })
+
+  useIsomorphicLayoutEffect(() => {
+    if (initialStay) {
+      stayAtBottom()
+      scrollToBottom()
+    }
+  }, [])
 
   useIsomorphicLayoutEffect(
     function startGotoBottomLoop() {
       return loopRequestAnimationFrame(() => {
-        if (shouldStayBottom.current && !isOnBottom()) {
-          scrollBottom()
+        if (shouldStayBottom.current && !isAtBottom()) {
+          scrollToBottom()
         }
       })
     },
-    [scrollBottom, isOnBottom],
+    [scrollToBottom, isAtBottom],
   )
 
   return useMemo(
     () => ({
-      scrollRef,
-      stayOnBottom,
-      stopOnBottom,
-      scrollBottom,
-      isOnBottom,
+      stayAtBottom,
+      stopAtBottom,
+      scrollToBottom,
+      isAtBottom,
     }),
-    [scrollBottom, isOnBottom, stayOnBottom, stopOnBottom],
+    [stayAtBottom, stopAtBottom, scrollToBottom, isAtBottom],
   )
 }

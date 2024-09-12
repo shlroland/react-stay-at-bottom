@@ -1,1 +1,1 @@
-export { useStayBottom } from './use-stay-bottom'
+export { useStayAtBottom } from './use-stay-at-bottom'
