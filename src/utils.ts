@@ -11,21 +11,25 @@ export const useIsomorphicLayoutEffect =
  * @internal
  */
 export const defaultRunScroll = memoize(
-  (domRef: HTMLElement) => (offset: number) => {
-    domRef.scrollTop = offset
-  },
+  (domRef: HTMLElement) =>
+    (offset: number, behavior?: ScrollOptions['behavior']) => {
+      domRef.scroll({
+        top: offset,
+        behavior,
+      })
+    },
 )
 
 /**
  * @internal
-*/
+ */
 export function maxScrollTop(dom: HTMLElement) {
   return dom.scrollHeight - dom.clientHeight
 }
 
 /**
  * @internal
-*/
+ */
 export function useElementEvent<K extends keyof HTMLElementEventMap>(
   target: RefObject<HTMLElement | null | undefined>,
   eventName: K,
@@ -42,7 +46,7 @@ export function useElementEvent<K extends keyof HTMLElementEventMap>(
 
 /**
  * @internal
-*/
+ */
 export function canUseScrollTopMax<T extends Element>(
   elm: T,
 ): elm is T & { scrollTopMax: number } {
@@ -51,7 +55,7 @@ export function canUseScrollTopMax<T extends Element>(
 
 /**
  * @internal
-*/
+ */
 export function usePersistFn<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   T extends (this: any, ...args: any[]) => any,

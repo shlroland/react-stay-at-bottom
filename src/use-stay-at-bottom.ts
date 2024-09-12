@@ -1,4 +1,4 @@
-import { type RefObject, useCallback, useMemo, useRef } from 'react'
+import { type RefObject, useCallback, useMemo, useRef, useState } from 'react'
 import invariant from 'tiny-invariant'
 
 import { loopRequestAnimationFrame } from './raf'
@@ -28,6 +28,8 @@ export function useStayAtBottom(
   const shouldStayBottom = useRef(false)
   const scrollingRaf = useRef<null | number>(null)
 
+  const [atBottom, setAtBottom] = useState(false)
+
   const stayAtBottom = useCallback(() => {
     if (shouldStayBottom.current) return
     shouldStayBottom.current = true
@@ -38,34 +40,43 @@ export function useStayAtBottom(
     shouldStayBottom.current = false
   }, [])
 
-  const scroll = usePersistFn((position: number) => {
-    invariant(
-      scrollRef.current !== null,
-      `Trying to scroll to the bottom, but no element was found.
+  const scroll = usePersistFn(
+    (position: number, behavior?: ScrollOptions['behavior']) => {
+      invariant(
+        scrollRef.current !== null,
+        `Trying to scroll to the bottom, but no element was found.
         Did you call this stayBottom before the component with this hook finished mounting?`,
-    )
+      )
 
-    const offset = Math.min(maxScrollTop(scrollRef.current), position)
-    if (handleScroll) {
-      handleScroll(scrollRef.current)
-    } else {
-      defaultRunScroll(scrollRef.current)(offset)
-    }
+      const offset = Math.min(maxScrollTop(scrollRef.current), position)
+      if (handleScroll) {
+        handleScroll(scrollRef.current)
+      } else {
+        defaultRunScroll(scrollRef.current)(offset, behavior)
+      }
 
-    if (scrollingRaf.current != null) {
-      cancelAnimationFrame(scrollingRaf.current)
-    }
-    scrollingRaf.current = requestAnimationFrame(() => {
-      scrollingRaf.current = null
-    })
-  })
+      if (scrollingRaf.current != null) {
+        cancelAnimationFrame(scrollingRaf.current)
+      }
+      scrollingRaf.current = requestAnimationFrame(() => {
+        scrollingRaf.current = null
+      })
+    },
+  )
 
-  const scrollToBottom = usePersistFn(() => {
-    scroll(Number.POSITIVE_INFINITY)
-  })
+  const scrollToBottom = usePersistFn(
+    (behavior?: ScrollOptions['behavior']) => {
+      scroll(Number.POSITIVE_INFINITY, behavior)
+    },
+  )
 
   const isAtBottom = usePersistFn(() => {
-    if (scrollRef.current == null) return false
+    let result: boolean
+    if (scrollRef.current == null) {
+      result = false
+      setAtBottom(result)
+      return result
+    }
 
     const scrollElement = scrollRef.current
 
@@ -73,17 +84,20 @@ export function useStayAtBottom(
      * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTopMax#browser_compatibility
      */
     if (canUseScrollTopMax(scrollElement)) {
-      return scrollElement.scrollTop >= scrollElement.scrollTopMax
+      result = scrollElement.scrollTop >= scrollElement.scrollTopMax
+      setAtBottom(result)
+      return result
     }
 
     const offset = 2
-    return (
+    result =
       Math.abs(
         scrollElement.scrollHeight -
           scrollElement.clientHeight -
           scrollElement.scrollTop,
       ) < offset
-    )
+    setAtBottom(result)
+    return result
   })
 
   useElementEvent(scrollRef, 'scroll', () => {
@@ -106,7 +120,7 @@ export function useStayAtBottom(
   useIsomorphicLayoutEffect(
     function startGotoBottomLoop() {
       return loopRequestAnimationFrame(() => {
-        if (shouldStayBottom.current && !isAtBottom()) {
+        if (!isAtBottom() && shouldStayBottom.current) {
           scrollToBottom()
         }
       })
@@ -119,8 +133,10 @@ export function useStayAtBottom(
       stayAtBottom,
       stopAtBottom,
       scrollToBottom,
+      atBottom,
       isAtBottom,
+      scroll,
     }),
-    [stayAtBottom, stopAtBottom, scrollToBottom, isAtBottom],
+    [stayAtBottom, stopAtBottom, scrollToBottom, atBottom, isAtBottom, scroll],
   )
 }
