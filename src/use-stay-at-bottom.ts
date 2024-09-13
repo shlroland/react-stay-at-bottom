@@ -160,7 +160,9 @@ export function useStayAtBottom(
 
   useIsomorphicLayoutEffect(() => {
     if (initialStay) {
-      stayAtBottom()
+      if (autoStay) {
+        stayAtBottom()
+      }
       scrollToBottom()
     }
   }, [])
