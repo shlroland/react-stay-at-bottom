@@ -10,7 +10,7 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
   ({ messages }, ref) => {
     return (
       <div
-        className="group w-full overflow-auto pl-0 lg:pl-[250px] xl:pl-[300px]"
+        className="group w-full overflow-auto pl-[250px] lg:pl-[300px]"
         ref={ref}
       >
         <div className="pb-[200px] pt-4 md:pt-10">
@@ -66,7 +66,7 @@ export function ChatInput({ sendMessage }: ChatInputProps) {
   }
 
   return (
-    <div className="from-muted/30 to-muted/30 animate-in dark:from-background/10 dark:to-background/80 fixed inset-x-0 bottom-0 w-full duration-300 ease-in-out lg:pl-[250px] xl:pl-[300px] dark:from-10%">
+    <div className="from-muted/30 to-muted/30 animate-in dark:from-background/10 dark:to-background/80 fixed inset-x-0 bottom-0 w-full duration-300 ease-in-out pl-[250px] lg:pl-[300px] dark:from-10%">
       <div className="mx-auto sm:max-w-2xl sm:px-4">
         <div className="bg-background space-y-4 border-t px-4 py-2 shadow-lg sm:rounded-t-xl sm:border md:py-4">
           <div className="bg-background relative flex max-h-16 w-full grow flex-col overflow-hidden pr-8 sm:rounded-md sm:border sm:pr-6">

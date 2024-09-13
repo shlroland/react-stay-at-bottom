@@ -4,7 +4,7 @@ import { cn } from '../utils'
 
 export function Sidebar(props: PropsWithChildren) {
   return (
-    <div className="peer absolute inset-y-0 z-30 hidden border-r bg-muted duration-300 ease-in-out data-[state=open]:translate-x-0 lg:flex lg:w-[250px] xl:w-[300px] h-full flex-col dark:bg-zinc-950">
+    <div className="peer absolute inset-y-0 z-30 border-r bg-muted duration-300 ease-in-out flex w-[250px] lg:w-[300px]  h-full flex-col dark:bg-zinc-950">
       <div className="flex h-full flex-col">
         <div className="flex flex-1 flex-col overflow-hidden">
           <div className="flex-1 overflow-auto py-8 space-y-2">
