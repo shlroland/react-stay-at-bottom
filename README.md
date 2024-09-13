@@ -1,6 +1,11 @@
 # react-stay-at-bottom
 
-A React hook that keeps a scrollable element at the bottom.
+A React hook that keeps a scrollable element at the bottom. 
+
+Typical scenario: 
+
+- web IM chat 
+- ai chat bot
 
 ![NPM Version](https://img.shields.io/npm/v/react-stay-at-bottom)
 
@@ -30,6 +35,10 @@ function MessageList({
   return <div ref={scrollRef}>{children}</div>
 }
 ```
+
+## Live Demo
+
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/shlroland/react-stay-at-bottom/tree/main/example?file=src%2Fcomponents%2Fsidebar.tsx)
 
 ## Parameters
 
@@ -83,7 +92,7 @@ description: A function that stops the scrollable element from being kept at the
 
 ### `scrollToBottom`: 
 
-type: `() => void`
+type: `(behavior?: ScrollOptions['behavior']) => void`
 
 description: A function that scrolls the scrollable element to the bottom.
 
@@ -95,7 +104,7 @@ description: A boolean indicating whether the scrollable element is at the botto
 
 ### `scroll`: 
 
-type: `() => void`
+type: `(behavior?: ScrollOptions['behavior']) => void`
 
 description: A function that scrolls the scrollable element to the bottom.
 
