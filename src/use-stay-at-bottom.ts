@@ -30,6 +30,19 @@ interface StayBottomOptions {
    * @default false
    */
   initialStay?: boolean
+
+  /**
+   * The scroll threshold to determine if the scrollable element is at the bottom.
+   * @default 'default' - 'default' is 2
+   *
+   * @note why default is 2?
+   * @see https://developer.mozilla.org/docs/Web/API/Element/scrollHeight#%E5%88%A4%E6%96%AD%E5%85%83%E7%B4%A0%E6%98%AF%E5%90%A6%E6%BB%9A%E5%8A%A8%E5%88%B0%E5%BA%95
+   * when set to `'default'`, the `scrollTopMax` will be used to calculate the offset
+   * 
+   * @note what is `scrollTopMax` ?
+   * @see  https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTopMax
+   */
+  scrollThreshold?: number | 'default'
 }
 
 interface StayBottomReturn {
@@ -71,7 +84,12 @@ export function useStayAtBottom(
   scrollRef: RefObject<HTMLElement>,
   options?: StayBottomOptions,
 ): StayBottomReturn {
-  const { handleScroll, autoStay = true, initialStay = false } = options ?? {}
+  const {
+    handleScroll,
+    autoStay = true,
+    initialStay = false,
+    scrollThreshold = 'default',
+  } = options ?? {}
 
   const shouldStayBottom = useRef(false)
   const scrollingRaf = useRef<null | number>(null)
@@ -131,13 +149,13 @@ export function useStayAtBottom(
     /**
      * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTopMax#browser_compatibility
      */
-    if (canUseScrollTopMax(scrollElement)) {
+    if (scrollThreshold === 'default' && canUseScrollTopMax(scrollElement)) {
       result = scrollElement.scrollTop >= scrollElement.scrollTopMax
       setAtBottom(result)
       return result
     }
 
-    const offset = 2
+    const offset = scrollThreshold === 'default' ? 2 : scrollThreshold
     result =
       Math.abs(
         scrollElement.scrollHeight -
