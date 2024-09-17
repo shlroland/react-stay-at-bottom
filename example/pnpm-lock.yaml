@@ -28,7 +28,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       react-stay-at-bottom:
         specifier: latest
-        version: 1.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 1.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tailwind-merge:
         specifier: ^2.5.2
         version: 2.5.2
@@ -38,7 +38,7 @@ importers:
         version: 9.10.0
       '@types/react':
         specifier: ^18.3.3
-        version: 18.3.5
+        version: 18.3.6
       '@types/react-dom':
         specifier: ^18.3.0
         version: 18.3.0
@@ -648,8 +648,8 @@ packages:
   '@types/react-dom@18.3.0':
     resolution: {integrity: sha512-EhwApuTmMBmXuFOikhQLIBUn6uFg81SwLMOAUgodJF14SOBOCMdU04gDoYi0WOJJHD144TL32z4yDqCW3dnkQg==}
 
-  '@types/react@18.3.5':
-    resolution: {integrity: sha512-WeqMfGJLGuLCqHGYRGHxnKrXcTitc6L/nBUWfWPcTarG3t9PsquqUMuVeXZeca+mglY4Vo5GZjCi0A3Or2lnxA==}
+  '@types/react@18.3.6':
+    resolution: {integrity: sha512-CnGaRYNu2iZlkGXGrOYtdg5mLK8neySj0woZ4e2wF/eli2E6Sazmq5X+Nrj6OBrrFVQfJWTUFeqAzoRhWQXYvg==}
 
   '@unocss/astro@0.62.3':
     resolution: {integrity: sha512-C6ZdyLbLDS0LebwmgwVItLNAOSkL/tvVWNRd1i3Jy5uj1vPxlrw+3lIYiHjEofn0GFpBiwlv5+OCvO1Xpq5MqA==}
@@ -1048,8 +1048,8 @@ packages:
     resolution: {integrity: sha512-jCvmsr+1IUSMUyzOkRcvnVbX3ZYC6g9TDrDbFuFmRDq7PD4yaGbLKNQL6k2jnArV8hjYxh7hVhAZB6s9HDGpZA==}
     engines: {node: '>=0.10.0'}
 
-  react-stay-at-bottom@1.1.0:
-    resolution: {integrity: sha512-Jkpf4clvALDm7xkBroP0imsdrjKQigtxDRVOztFxrZXKE6tL92fNEXDKXyBZsGYmAjK6ed/xJb9lpHLr0rTYRA==}
+  react-stay-at-bottom@1.1.1:
+    resolution: {integrity: sha512-xhSzAXPLkH+LhGZ7+amlgsb62WP8A1nUkLcFkA10IRBzbd1cGbxFpntLxgzl10kyuUXO5wxuguMQomlzKe2brg==}
     peerDependencies:
       react: '>= 17'
       react-dom: '>= 17'
@@ -1678,9 +1678,9 @@ snapshots:
 
   '@types/react-dom@18.3.0':
     dependencies:
-      '@types/react': 18.3.5
+      '@types/react': 18.3.6
 
-  '@types/react@18.3.5':
+  '@types/react@18.3.6':
     dependencies:
       '@types/prop-types': 15.7.12
       csstype: 3.1.3
@@ -2155,7 +2155,7 @@ snapshots:
 
   react-refresh@0.14.2: {}
 
-  react-stay-at-bottom@1.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-stay-at-bottom@1.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       memoize-one: 6.0.0
       react: 18.3.1
