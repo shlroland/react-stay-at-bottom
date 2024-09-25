@@ -35,7 +35,7 @@ importers:
     devDependencies:
       '@eslint/js':
         specifier: ^9.9.0
-        version: 9.11.0
+        version: 9.11.1
       '@types/react':
         specifier: ^18.3.3
         version: 18.3.8
@@ -445,8 +445,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@eslint/js@9.11.0':
-    resolution: {integrity: sha512-LPkkenkDqyzTFauZLLAPhIb48fj6drrfMvRGSL9tS3AcZBSVTllemLSNyCvHNNL2t797S/6DJNSIwRwXgMO/eQ==}
+  '@eslint/js@9.11.1':
+    resolution: {integrity: sha512-/qu+TWz8WwPWc7/HcIJKi+c+MOm46GdVaSlTTQcaqaL53+GsoA6MxWp5PtTx48qbSP7ylM1Kn7nhvkugfJvRSA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@faker-js/faker@9.0.1':
@@ -1409,7 +1409,7 @@ snapshots:
   '@esbuild/win32-x64@0.23.1':
     optional: true
 
-  '@eslint/js@9.11.0': {}
+  '@eslint/js@9.11.1': {}
 
   '@faker-js/faker@9.0.1': {}
 
