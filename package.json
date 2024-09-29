@@ -2,7 +2,7 @@
   "name": "react-stay-at-bottom",
   "type": "module",
   "version": "1.0.0",
-  "packageManager": "pnpm@9.10.0",
+  "packageManager": "pnpm@9.11.0",
   "description": "A React hook that keeps a scrollable element at the bottom.",
   "author": "shlroland <shlroland1995@gmail.com>",
   "license": "MIT",
