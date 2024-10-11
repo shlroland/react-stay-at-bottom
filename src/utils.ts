@@ -4,8 +4,8 @@ import { type RefObject, useEffect, useLayoutEffect, useRef } from 'react'
 /**
  * @internal
  */
-export const useIsomorphicLayoutEffect =
-  typeof window === 'undefined' ? useEffect : useLayoutEffect
+export const useIsomorphicLayoutEffect
+  = typeof window === 'undefined' ? useEffect : useLayoutEffect
 
 /**
  * @internal
@@ -23,7 +23,7 @@ export const defaultRunScroll = memoize(
 /**
  * @internal
  */
-export function maxScrollTop(dom: HTMLElement) {
+export function maxScrollTop(dom: HTMLElement): number {
   return dom.scrollHeight - dom.clientHeight
 }
 
@@ -37,7 +37,8 @@ export function useElementEvent<K extends keyof HTMLElementEventMap>(
 ): void {
   useEffect(() => {
     const _target = target.current
-    if (!_target) return
+    if (!_target)
+      return
 
     _target.addEventListener(eventName, listener)
     return () => _target.removeEventListener(eventName, listener)
@@ -57,7 +58,6 @@ export function canUseScrollTopMax<T extends Element>(
  * @internal
  */
 export function usePersistFn<
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   T extends (this: any, ...args: any[]) => any,
 >(fn: T): T {
   const fnRef = useRef<T>(fn)
@@ -66,7 +66,6 @@ export function usePersistFn<
   const persistFn = useRef<T>()
   if (!persistFn.current) {
     persistFn.current = function (...args) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return fnRef.current.apply(this, args)
     } as T
   }

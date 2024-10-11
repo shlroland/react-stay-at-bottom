@@ -2,10 +2,10 @@ import { useState } from 'react'
 
 import { Sidebar, SidebarItem } from './components/sidebar'
 import { AutoStay } from './routes/auto-stay'
-import { ManualStay } from './routes/manual-stay'
 import { ButtonIndicator } from './routes/button-indicator'
+import { ManualStay } from './routes/manual-stay'
 
-function App() {
+function App(): JSX.Element {
   const [selected, setSelected] = useState(1)
 
   return (
@@ -27,11 +27,11 @@ function App() {
           button indicator
         </SidebarItem>
       </Sidebar>
-      {selected === 1 && <AutoStay initialStay={true} />}
-      {selected === 2 && <ManualStay initialStay={true} />}
+      {selected === 1 && <AutoStay initialStay />}
+      {selected === 2 && <ManualStay initialStay />}
       {selected === 3 && <AutoStay initialStay={false} />}
       {selected === 4 && <ManualStay initialStay={false} />}
-      {selected === 5 && <ButtonIndicator initialStay={true} />}
+      {selected === 5 && <ButtonIndicator initialStay />}
     </main>
   )
 }

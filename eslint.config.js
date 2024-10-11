@@ -1,7 +1,10 @@
-import { basic, react, markdown } from "@ocavue/eslint-config";
+import { shlroland } from '@shlroland/eslint-config'
 
-export default [
-  ...basic(),
-  ...react(),
-  ...markdown(),
-];
+export default shlroland({
+  type: 'lib',
+  react: {
+    overrides: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
+})

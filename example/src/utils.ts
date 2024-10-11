@@ -1,20 +1,20 @@
+import type { ChatMessageProps } from './components/chat'
 import { faker } from '@faker-js/faker'
-import { clsx, type ClassValue } from 'clsx'
+import { type ClassValue, clsx } from 'clsx'
 import { nanoid } from 'nanoid/non-secure'
 import { type DependencyList, type EffectCallback, useEffect, useRef, useState } from 'react'
+
 import { twMerge } from 'tailwind-merge'
 
-import { type ChatMessageProps } from './components/chat'
-
-export function cn(...inputs: ClassValue[]) {
+export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs))
 }
 
-export async function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms))
+export async function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-export function initMessages() {
+export function initMessages(): ChatMessageProps[] {
   return [
     {
       role: 'user',
@@ -99,31 +99,32 @@ export function initMessages() {
   ] as ChatMessageProps[]
 }
 
-export function useUpdateEffect(effect: EffectCallback, deps?: DependencyList) {
-  const isInitialMount = useRef(true);
+export function useUpdateEffect(effect: EffectCallback, deps?: DependencyList): void {
+  const isInitialMount = useRef(true)
 
   useEffect(() => {
     if (isInitialMount.current) {
-      isInitialMount.current = false;
-    } else {
-      return effect();
+      isInitialMount.current = false
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, deps);
+    else {
+      return effect()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps)
 }
 
 export function useDebounce<T>(value: T, delay: number): T {
-  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+  const [debouncedValue, setDebouncedValue] = useState<T>(value)
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
+      setDebouncedValue(value)
+    }, delay)
 
     return () => {
-      clearTimeout(timer);
-    };
-  }, [value, delay]);
+      clearTimeout(timer)
+    }
+  }, [value, delay])
 
-  return debouncedValue;
+  return debouncedValue
 }

@@ -1,6 +1,6 @@
-import { forwardRef, useState, useRef, type RefObject } from 'react'
+import { forwardRef, type RefObject, useRef, useState } from 'react'
 
-import { IconUser, IconArrowElbow, IconRobot } from './icons'
+import { IconArrowElbow, IconRobot, IconUser } from './icons'
 
 export interface ChatProps {
   messages: ChatMessageProps[]
@@ -36,7 +36,7 @@ export interface ChatMessageProps {
   id: string
 }
 
-function ChatMessage({ role, content }: ChatMessageProps) {
+function ChatMessage({ role, content }: ChatMessageProps): JSX.Element {
   return (
     <div className="group relative flex items-start md:-ml-12">
       <div className="bg-background flex size-[25px] shrink-0 select-none items-center justify-center rounded-md border shadow-sm">
@@ -49,7 +49,7 @@ function ChatMessage({ role, content }: ChatMessageProps) {
   )
 }
 
-function Separator() {
+function Separator(): JSX.Element {
   return <div className="shrink-0 bg-border h-[1px] w-full my-4"></div>
 }
 
@@ -57,10 +57,10 @@ interface ChatInputProps {
   sendMessage: (message: string) => void
 }
 
-export function ChatInput({ sendMessage }: ChatInputProps) {
+export function ChatInput({ sendMessage }: ChatInputProps): JSX.Element {
   const [input, setInput] = useState('')
 
-  const handleSendMessage = () => {
+  const handleSendMessage = (): void => {
     sendMessage(input)
     setInput('')
   }
@@ -74,20 +74,22 @@ export function ChatInput({ sendMessage }: ChatInputProps) {
               className="min-h-[60px] w-full resize-none bg-transparent px-4 py-5 focus-within:outline-none sm:text-sm"
               autoFocus
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={e => setInput(e.target.value)}
               onKeyDown={(event) => {
                 if (
-                  event.key === 'Enter' &&
-                  !event.shiftKey &&
-                  !event.nativeEvent.isComposing
+                  event.key === 'Enter'
+                  && !event.shiftKey
+                  && !event.nativeEvent.isComposing
                 ) {
                   event.preventDefault()
                   handleSendMessage()
                 }
               }}
-            ></textarea>
+            >
+            </textarea>
             <div className="absolute right-0 top-[13px] sm:right-4">
               <button
+                type="button"
                 onClick={handleSendMessage}
                 className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 w-9"
               >
@@ -111,9 +113,9 @@ export function useEnterSubmit(): {
     event: React.KeyboardEvent<HTMLTextAreaElement>,
   ): void => {
     if (
-      event.key === 'Enter' &&
-      !event.shiftKey &&
-      !event.nativeEvent.isComposing
+      event.key === 'Enter'
+      && !event.shiftKey
+      && !event.nativeEvent.isComposing
     ) {
       formRef.current?.requestSubmit()
       event.preventDefault()

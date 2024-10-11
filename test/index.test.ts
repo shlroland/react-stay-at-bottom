@@ -1,9 +1,9 @@
-import { test, expect } from 'vitest'
+import { expect, it } from 'vitest'
 
 function sum(a: number, b: number) {
   return a + b
 }
 
-test('sum', () => {
+it('sum', () => {
   expect(sum(1, 2)).toBe(3)
 })

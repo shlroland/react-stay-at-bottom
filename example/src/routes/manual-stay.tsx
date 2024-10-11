@@ -6,16 +6,16 @@ import { useStayAtBottom } from 'react-stay-at-bottom'
 import { Chat, ChatInput, type ChatMessageProps } from '../components/chat'
 import { initMessages, sleep, useUpdateEffect } from '../utils'
 
-export function ManualStay(props: { initialStay: boolean }) {
+export function ManualStay({ initialStay }: { initialStay: boolean }): JSX.Element {
   const [messages, setMessages] = useState<ChatMessageProps[]>(initMessages())
 
-  const handleSendMessage = async (message: string) => {
-    setMessages((msgs) => [
+  const handleSendMessage = async (message: string): Promise<void> => {
+    setMessages(msgs => [
       ...msgs,
       { role: 'user', id: nanoid(), content: message },
     ])
     await sleep(1000)
-    setMessages((msgs) => [
+    setMessages(msgs => [
       ...msgs,
       {
         role: 'bot',
@@ -28,12 +28,11 @@ export function ManualStay(props: { initialStay: boolean }) {
   const scrollRef = useRef<HTMLDivElement>(null)
 
   const { scrollToBottom } = useStayAtBottom(scrollRef, {
-    initialStay: props.initialStay,
+    initialStay,
     autoStay: false,
   })
 
   useUpdateEffect(() => {
-    console.log(messages.length)
     scrollToBottom()
   }, [messages.length])
 
