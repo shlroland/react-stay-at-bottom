@@ -28,14 +28,14 @@ importers:
         version: 18.3.1(react@18.3.1)
       react-stay-at-bottom:
         specifier: latest
-        version: 1.1.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 1.1.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tailwind-merge:
         specifier: ^2.5.2
         version: 2.5.4
     devDependencies:
       '@eslint/js':
         specifier: ^9.9.0
-        version: 9.12.0
+        version: 9.15.0
       '@types/react':
         specifier: ^18.3.3
         version: 18.3.11
@@ -445,8 +445,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@eslint/js@9.12.0':
-    resolution: {integrity: sha512-eohesHH8WFRUprDNyEREgqP6beG6htMeUYeCpkEgBCieCMme5r9zFWjzAJp//9S+Kub4rqE+jXe9Cp1a7IYIIA==}
+  '@eslint/js@9.15.0':
+    resolution: {integrity: sha512-tMTqrY+EzbXmKJR5ToI8lxu7jaN5EdmrBFJpQk5JmSlyLsx6o4t27r883K5xsLuCYCpfKBCGswMSWXsM+jB7lg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@faker-js/faker@9.0.3':
@@ -987,8 +987,8 @@ packages:
     resolution: {integrity: sha512-jCvmsr+1IUSMUyzOkRcvnVbX3ZYC6g9TDrDbFuFmRDq7PD4yaGbLKNQL6k2jnArV8hjYxh7hVhAZB6s9HDGpZA==}
     engines: {node: '>=0.10.0'}
 
-  react-stay-at-bottom@1.1.4:
-    resolution: {integrity: sha512-E9wHQopOE3tL0DqPyOwXH2W4LVlbic7UZgp3RYYCM/c+lpxF6jh4mqsvEvOioL+U6b7Zrao/P/rlZXG4OAo4AQ==}
+  react-stay-at-bottom@1.1.5:
+    resolution: {integrity: sha512-99HjVSJat/8khJaXiNHZOVZiZl5+UdMnpDp6gjWp6UHdVnQ6MDtdUE0dNAZnkYsbO7rD1mO/AFAZNBrIPWw2SQ==}
     peerDependencies:
       react: '>= 17'
       react-dom: '>= 17'
@@ -1412,7 +1412,7 @@ snapshots:
   '@esbuild/win32-x64@0.23.1':
     optional: true
 
-  '@eslint/js@9.12.0': {}
+  '@eslint/js@9.15.0': {}
 
   '@faker-js/faker@9.0.3': {}
 
@@ -1997,7 +1997,7 @@ snapshots:
 
   react-refresh@0.14.2: {}
 
-  react-stay-at-bottom@1.1.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-stay-at-bottom@1.1.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       memoize-one: 6.0.0
       react: 18.3.1
